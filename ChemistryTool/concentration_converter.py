@@ -23,10 +23,10 @@ class ConcentrationConverter:
     
     def __init__(self):
         """Initialize the concentration converter."""
-        # Standard density of water at 25°C (g/mL)
+        # Standard density of water at 25C (g/mL)
         self.water_density = 0.997
         
-        # Common solvent densities (g/mL) at 25°C
+        # Common solvent densities (g/mL) at 25C
         self.solvent_densities = {
             'water': 0.997,
             'ethanol': 0.789,

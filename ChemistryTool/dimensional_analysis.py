@@ -147,7 +147,7 @@ class DimensionalAnalyzer:
         if 'offset' in from_info:
             base_value += from_info['offset']
         
-        steps.append(f"3. Convert to base unit: {value} × {from_info['factor']} = {base_value}")
+        steps.append(f"3. Convert to base unit: {value} x {from_info['factor']} = {base_value}")
         
         # Convert from base unit to target unit
         if 'offset' in to_info:
@@ -155,7 +155,7 @@ class DimensionalAnalyzer:
         
         converted_value = base_value / to_info['factor']
         
-        steps.append(f"4. Convert to target unit: {base_value} ÷ {to_info['factor']} = {converted_value}")
+        steps.append(f"4. Convert to target unit: {base_value} / {to_info['factor']} = {converted_value}")
         steps.append(f"5. Final result: {converted_value} {to_unit}")
         
         return converted_value, steps
@@ -181,10 +181,10 @@ class DimensionalAnalyzer:
             atomic_weight = self._get_atomic_weight(element)
             element_weight = atomic_weight * count
             
-            steps.append(f"• {element}: {count} atoms × {atomic_weight} g/mol = {element_weight} g/mol")
+            steps.append(f" {element}: {count} atoms x {atomic_weight} g/mol = {element_weight} g/mol")
             total_weight += element_weight
         
-        steps.append(f"• Total molecular weight: {total_weight} g/mol")
+        steps.append(f" Total molecular weight: {total_weight} g/mol")
         
         # Validate the calculation
         validation = self._validate_molecular_weight_calculation(elements, total_weight)
@@ -211,7 +211,7 @@ class DimensionalAnalyzer:
             Dict[str, any]: Analysis with steps and validation
         """
         steps = []
-        steps.append(f"Concentration Conversion Analysis: {from_unit} → {to_unit}")
+        steps.append(f"Concentration Conversion Analysis: {from_unit} -> {to_unit}")
         steps.append("=" * 50)
         
         # Analyze the conversion based on unit types
@@ -228,7 +228,7 @@ class DimensionalAnalyzer:
             # Normality to molarity
             steps.extend(self._analyze_normality_to_molarity(value))
         else:
-            steps.append(f"Unsupported conversion: {from_unit} → {to_unit}")
+            steps.append(f"Unsupported conversion: {from_unit} -> {to_unit}")
         
         # Validate the conversion
         validation = self._validate_concentration_conversion(from_unit, to_unit, value)
@@ -246,9 +246,9 @@ class DimensionalAnalyzer:
         steps.append(f"1. Original molarity: {molarity} mol/L")
         steps.append(f"2. Solute molecular weight: {solute_mw} g/mol")
         steps.append("3. Conversion steps:")
-        steps.append(f"   • Mass of solute per liter: {molarity} mol/L × {solute_mw} g/mol = {molarity * solute_mw} g/L")
-        steps.append(f"   • Mass of solvent per liter: 1000 g/L - {molarity * solute_mw} g/L = {1000 - molarity * solute_mw} g/L")
-        steps.append(f"   • Molality: {molarity} mol / {(1000 - molarity * solute_mw) / 1000} kg = {molarity / ((1000 - molarity * solute_mw) / 1000)} mol/kg")
+        steps.append(f"    Mass of solute per liter: {molarity} mol/L x {solute_mw} g/mol = {molarity * solute_mw} g/L")
+        steps.append(f"    Mass of solvent per liter: 1000 g/L - {molarity * solute_mw} g/L = {1000 - molarity * solute_mw} g/L")
+        steps.append(f"    Molality: {molarity} mol / {(1000 - molarity * solute_mw) / 1000} kg = {molarity / ((1000 - molarity * solute_mw) / 1000)} mol/kg")
         
         return steps
     
@@ -259,10 +259,10 @@ class DimensionalAnalyzer:
         steps.append(f"1. Original molality: {molality} mol/kg")
         steps.append(f"2. Solute molecular weight: {solute_mw} g/mol")
         steps.append("3. Conversion steps:")
-        steps.append(f"   • Mass of solute per kg solvent: {molality} mol/kg × {solute_mw} g/mol = {molality * solute_mw} g/kg")
-        steps.append(f"   • Total mass per kg solvent: 1000 g + {molality * solute_mw} g = {1000 + molality * solute_mw} g")
-        steps.append(f"   • Volume per kg solvent: {(1000 + molality * solute_mw) / 1000} L")
-        steps.append(f"   • Molarity: {molality} mol / {(1000 + molality * solute_mw) / 1000} L = {molality / ((1000 + molality * solute_mw) / 1000)} mol/L")
+        steps.append(f"    Mass of solute per kg solvent: {molality} mol/kg x {solute_mw} g/mol = {molality * solute_mw} g/kg")
+        steps.append(f"    Total mass per kg solvent: 1000 g + {molality * solute_mw} g = {1000 + molality * solute_mw} g")
+        steps.append(f"    Volume per kg solvent: {(1000 + molality * solute_mw) / 1000} L")
+        steps.append(f"    Molarity: {molality} mol / {(1000 + molality * solute_mw) / 1000} L = {molality / ((1000 + molality * solute_mw) / 1000)} mol/L")
         
         return steps
     
@@ -272,8 +272,8 @@ class DimensionalAnalyzer:
         
         steps.append(f"1. Original molarity: {molarity} mol/L")
         steps.append("2. Normality calculation:")
-        steps.append(f"   • Normality = Molarity × valence factor")
-        steps.append(f"   • Assuming valence factor = 1: {molarity} × 1 = {molarity} N")
+        steps.append(f"    Normality = Molarity x valence factor")
+        steps.append(f"    Assuming valence factor = 1: {molarity} x 1 = {molarity} N")
         
         return steps
     
@@ -283,8 +283,8 @@ class DimensionalAnalyzer:
         
         steps.append(f"1. Original normality: {normality} N")
         steps.append("2. Molarity calculation:")
-        steps.append(f"   • Molarity = Normality ÷ valence factor")
-        steps.append(f"   • Assuming valence factor = 1: {normality} ÷ 1 = {normality} M")
+        steps.append(f"    Molarity = Normality / valence factor")
+        steps.append(f"    Assuming valence factor = 1: {normality} / 1 = {normality} M")
         
         return steps
     
@@ -373,8 +373,8 @@ class DimensionalAnalyzer:
             ],
             'Volume': [
                 '1 L = 1000 mL',
-                '1 L = 1 dm³',
-                '1 mL = 1 cm³',
+                '1 L = 1 dm',
+                '1 mL = 1 cm',
                 '1 gal = 3.785 L'
             ],
             'Mass': [
@@ -391,9 +391,9 @@ class DimensionalAnalyzer:
                 '1% = 10 g/L (for dilute aqueous solutions)'
             ],
             'Temperature': [
-                'K = °C + 273.15',
-                '°C = (°F - 32) × 5/9',
-                '°F = °C × 9/5 + 32'
+                'K = C + 273.15',
+                'C = (F - 32) x 5/9',
+                'F = C x 9/5 + 32'
             ]
         }
         

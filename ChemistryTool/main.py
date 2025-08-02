@@ -72,17 +72,17 @@ class ChemistryCLI:
                 if choice in ['1', '2', '3', '4', '5', '6', '7']:
                     return choice
                 else:
-                    print("❌ Invalid choice. Please enter a number between 1 and 7.")
+                    print("Invalid choice. Please enter a number between 1 and 7.")
             except KeyboardInterrupt:
-                print("\n👋 Goodbye!")
+                print("\n Goodbye!")
                 sys.exit(0)
             except EOFError:
-                print("\n👋 Goodbye!")
+                print("\n Goodbye!")
                 sys.exit(0)
     
     def parse_formula(self):
         """Handle chemical formula parsing."""
-        print("\n🔬 Chemical Formula Parser")
+        print("\n Chemical Formula Parser")
         print("-" * 30)
         
         # Get input method
@@ -97,28 +97,28 @@ class ChemistryCLI:
             if formula:
                 try:
                     result = self.parser.parse_formula(formula)
-                    print(f"\n✅ Parsed formula: {formula}")
+                    print(f"\n Parsed formula: {formula}")
                     print(f"Elements: {result}")
                 except ValueError as e:
-                    print(f"❌ Error: {e}")
+                    print(f" Error: {e}")
         elif method == "2":
             file_path = input("Enter file path: ").strip()
             if validate_file_path(file_path):
                 try:
                     formulas = self.parser.parse_file(file_path)
-                    print(f"\n✅ Parsed {len(formulas)} formulas from file")
+                    print(f"\n Parsed {len(formulas)} formulas from file")
                     for formula, elements in formulas.items():
                         print(f"  {formula}: {elements}")
                 except Exception as e:
-                    print(f"❌ Error reading file: {e}")
+                    print(f" Error reading file: {e}")
             else:
-                print("❌ Invalid file path")
+                print(" Invalid file path")
         else:
-            print("❌ Invalid choice")
+            print(" Invalid choice")
     
     def calculate_molecular_weight(self):
         """Handle molecular weight calculations."""
-        print("\n⚖️ Molecular Weight Calculator")
+        print("\n Molecular Weight Calculator")
         print("-" * 35)
         
         formula = input("Enter chemical formula: ").strip()
@@ -131,16 +131,16 @@ class ChemistryCLI:
                 weight = self.molecular_calc.calculate_molecular_weight(elements)
                 empirical = self.molecular_calc.get_empirical_formula(elements)
                 
-                print(f"\n📊 Results for {formula}:")
+                print(f"\n Results for {formula}:")
                 print(f"Molecular Weight: {weight:.2f} g/mol")
                 print(f"Empirical Formula: {empirical}")
                 
             except ValueError as e:
-                print(f"❌ Error: {e}")
+                print(f" Error: {e}")
     
     def balance_equation(self):
         """Handle chemical equation balancing."""
-        print("\n⚖️ Chemical Equation Balancer")
+        print("\n Chemical Equation Balancer")
         print("-" * 35)
         
         print("Enter the unbalanced equation:")
@@ -151,14 +151,14 @@ class ChemistryCLI:
         if equation:
             try:
                 balanced = self.equation_balancer.balance_equation(equation)
-                print(f"\n✅ Balanced equation:")
+                print(f"\n Balanced equation:")
                 print(f"  {balanced}")
             except ValueError as e:
-                print(f"❌ Error: {e}")
+                print(f" Error: {e}")
     
     def perform_stoichiometry(self):
         """Handle stoichiometry calculations."""
-        print("\n🧮 Stoichiometry Calculator")
+        print("\n Stoichiometry Calculator")
         print("-" * 30)
         
         print("Choose calculation type:")
@@ -175,11 +175,11 @@ class ChemistryCLI:
         elif calc_type == "3":
             self._calculate_percent_yield()
         else:
-            print("❌ Invalid choice")
+            print(" Invalid choice")
     
     def _calculate_limiting_reactant(self):
         """Calculate limiting reactant."""
-        print("\n🔍 Limiting Reactant Calculator")
+        print("\nLimiting Reactant Calculator")
         print("Enter reactants and their amounts:")
         
         reactants = {}
@@ -191,18 +191,18 @@ class ChemistryCLI:
                 amount = float(input(f"Enter amount of {reactant} (moles): "))
                 reactants[reactant] = amount
             except ValueError:
-                print("❌ Invalid amount")
+                print(" Invalid amount")
         
         if reactants:
             try:
                 limiting = self.stoichiometry_calc.find_limiting_reactant(reactants)
-                print(f"\n✅ Limiting reactant: {limiting}")
+                print(f"\n Limiting reactant: {limiting}")
             except ValueError as e:
-                print(f"❌ Error: {e}")
+                print(f" Error: {e}")
     
     def _calculate_theoretical_yield(self):
         """Calculate theoretical yield."""
-        print("\n📊 Theoretical Yield Calculator")
+        print("\n Theoretical Yield Calculator")
         
         reactant = input("Enter limiting reactant formula: ").strip()
         reactant_amount = input("Enter reactant amount (moles): ").strip()
@@ -213,26 +213,26 @@ class ChemistryCLI:
             yield_amount = self.stoichiometry_calc.calculate_theoretical_yield(
                 reactant, reactant_moles, product
             )
-            print(f"\n✅ Theoretical yield: {yield_amount:.2f} moles of {product}")
+            print(f"\n Theoretical yield: {yield_amount:.2f} moles of {product}")
         except ValueError as e:
-            print(f"❌ Error: {e}")
+            print(f" Error: {e}")
     
     def _calculate_percent_yield(self):
         """Calculate percent yield."""
-        print("\n📈 Percent Yield Calculator")
+        print("\nPercent Yield Calculator")
         
         try:
             theoretical = float(input("Enter theoretical yield (moles): "))
             actual = float(input("Enter actual yield (moles): "))
             
             percent = self.stoichiometry_calc.calculate_percent_yield(theoretical, actual)
-            print(f"\n✅ Percent yield: {percent:.2f}%")
+            print(f"\n Percent yield: {percent:.2f}%")
         except ValueError:
-            print("❌ Invalid input values")
+            print(" Invalid input values")
     
     def convert_concentration(self):
         """Handle concentration unit conversions."""
-        print("\n🔄 Concentration Unit Converter")
+        print("\n Concentration Unit Converter")
         print("-" * 35)
         
         print("Available conversions:")
@@ -249,25 +249,25 @@ class ChemistryCLI:
             
             if conv_type == "1":
                 result = self.concentration_converter.molarity_to_molality(value, solute_mw)
-                print(f"✅ Molality: {result:.4f} mol/kg")
+                print(f" Molality: {result:.4f} mol/kg")
             elif conv_type == "2":
                 result = self.concentration_converter.molality_to_molarity(value, solute_mw)
-                print(f"✅ Molarity: {result:.4f} mol/L")
+                print(f" Molarity: {result:.4f} mol/L")
             elif conv_type == "3":
                 result = self.concentration_converter.molarity_to_normality(value, solute_mw)
-                print(f"✅ Normality: {result:.4f} N")
+                print(f" Normality: {result:.4f} N")
             elif conv_type == "4":
                 result = self.concentration_converter.normality_to_molarity(value, solute_mw)
-                print(f"✅ Molarity: {result:.4f} mol/L")
+                print(f" Molarity: {result:.4f} mol/L")
             else:
-                print("❌ Invalid choice")
+                print(" Invalid choice")
                 
         except ValueError:
-            print("❌ Invalid input values")
+            print(" Invalid input values")
     
     def generate_report(self):
         """Generate a comprehensive chemistry report."""
-        print("\n📄 Chemistry Report Generator")
+        print("\n Chemistry Report Generator")
         print("-" * 35)
         
         report_name = input("Enter report name (without extension): ").strip()
@@ -278,11 +278,11 @@ class ChemistryCLI:
                 if formulas:
                     formula_list = [f.strip() for f in formulas.split(',')]
                     self.report_generator.generate_report(report_name, formula_list)
-                    print(f"✅ Report generated: {report_name}.txt")
+                    print(f" Report generated: {report_name}.txt")
                 else:
-                    print("❌ No formulas provided")
+                    print(" No formulas provided")
             except Exception as e:
-                print(f"❌ Error generating report: {e}")
+                print(f" Error generating report: {e}")
     
     def run(self):
         """Main CLI loop."""
@@ -305,16 +305,16 @@ class ChemistryCLI:
                 elif choice == "6":
                     self.generate_report()
                 elif choice == "7":
-                    print("👋 Thank you for using the Chemical Analysis CLI Tool!")
+                    print(" Thank you for using the Chemical Analysis CLI Tool!")
                     break
                 
                 input("\nPress Enter to continue...")
                 
             except KeyboardInterrupt:
-                print("\n👋 Goodbye!")
+                print("\n Goodbye!")
                 break
             except Exception as e:
-                print(f"❌ Unexpected error: {e}")
+                print(f" Unexpected error: {e}")
                 input("Press Enter to continue...")
 
 
@@ -324,7 +324,7 @@ def main():
         cli = ChemistryCLI()
         cli.run()
     except Exception as e:
-        print(f"❌ Fatal error: {e}")
+        print(f" Fatal error: {e}")
         sys.exit(1)
 
 

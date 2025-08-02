@@ -5,7 +5,6 @@ This module provides functionality to balance chemical equations using
 algebraic methods. It can handle simple equations and provides step-by-step
 balancing with coefficient determination.
 
-
 """
 
 import re
